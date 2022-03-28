@@ -9,7 +9,7 @@
  * Required External Modules
  */
 import * as dotenv from 'dotenv';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import * as bodyParser from 'body-parser';
@@ -29,8 +29,8 @@ if (!process.env.PORT) {
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
 const corsOpts = {
-    origin: 'https://nft-corona-server.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTION', 'PATCH'],
     allowedHeaders: ['Content-Type'],
 };
 
@@ -49,6 +49,10 @@ mongoose.connect(process.env.DATABASE_URL as string, () => {
     // app.use(helmet());
     app.use(cors(corsOpts));
     app.use(express.json());
+    app.use((req: Request, res: Response, next: NextFunction) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        next();
+    })
 
     app.use("/", routes);
 
