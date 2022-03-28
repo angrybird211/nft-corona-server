@@ -10,7 +10,7 @@
  */
 import * as dotenv from 'dotenv';
 import express from 'express';
-import cors from 'cors';
+// import cors from 'cors';
 import helmet from 'helmet';
 import * as bodyParser from 'body-parser';
 import mongoose from 'mongoose';
@@ -23,19 +23,19 @@ dotenv.config();
 /**
  * App variables
  */
-if ( ! process.env.PORT ) {
+if (!process.env.PORT) {
     process.exit(1);
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
-
+const cors = require('cors');
 
 /**
  * Eastablish database connection
  */
 mongoose.connect(process.env.DATABASE_URL as string, () => {
     console.log("connected to the database");
-    
+
     const app = express();
 
 
