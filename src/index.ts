@@ -29,7 +29,7 @@ if (!process.env.PORT) {
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
 const corsOpts = {
-    origin: '*',
+    origin: 'https://nft-corona-server.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type'],
 };
