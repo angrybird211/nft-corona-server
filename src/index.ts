@@ -42,18 +42,17 @@ mongoose.connect(process.env.DATABASE_URL as string, () => {
 
     const app = express();
 
+    // app.use((req: Request, res: Response, next: NextFunction) => {
+    //     res.setHeader('Access-Control-Allow-Origin', '*');
+    //     next();
+    // })
 
     /**
      * App Configurations
      */
     // app.use(helmet());
-    // app.use(cors(corsOpts));
+    app.use(cors(corsOpts));
     app.use(express.json());
-    app.use((req: Request, res: Response, next: NextFunction) => {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        console.log("res is", res);
-        next();
-    })
 
     app.use("/", routes);
 
