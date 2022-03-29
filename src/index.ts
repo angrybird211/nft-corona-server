@@ -51,6 +51,7 @@ mongoose.connect(process.env.DATABASE_URL as string, () => {
     app.use(express.json());
     app.use((req: Request, res: Response, next: NextFunction) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
+        console.log("res is", res);
         next();
     })
 
